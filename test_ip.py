@@ -12,11 +12,11 @@ def detection_IP():
     for one in all_ip:
         if len(one) > 0:
             #print(one)
-            http = one.split(' ')[0]
+            http = one.split(' ')[0].lower()
             ip = one.split(' ')[1]
             port = one.split(' ')[2]
             #这里的网页可以改成你想要爬取的网页
-            if int(str(requests.get('http://fanyi.youdao.com/',headers=header,proxies={http:'{}:{}'.format(ip,port)})).split('[')[1].split(']')[0]) ==200:
+            if int(str(requests.get('http://fanyi.youdao.com/',headers=header,proxies={http:'{}://{}:{}'.format(http,ip,port)})).split('[')[1].split(']')[0]) ==200:
                 p = {'ipaddr':'{}:{}'.format(ip,port)}
                 IPPOOL.append(p)
     return IPPOOL
