@@ -23,8 +23,7 @@ class ip_pool(scrapy.Spider):
         '''开始'''
         print('star'*20)
         url = ['http://www.xicidaili.com/nn/']
-        for i in url:
-            print(i*20)
+        for i in url：
             if i == 'http://www.xicidaili.com/nn/':
                 try:
                     yield scrapy.Request(url=i,callback=self.parse_xici)
