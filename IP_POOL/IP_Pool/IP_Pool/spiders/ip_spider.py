@@ -23,7 +23,8 @@ class ip_pool(scrapy.Spider):
         '''开始'''
         print('star'*20)
         url = ['http://www.xicidaili.com/nn/']
-        for i in url：
+        for i in url:
+            print(i*20)
             if i == 'http://www.xicidaili.com/nn/':
                 try:
                     yield scrapy.Request(url=i,callback=self.parse_xici)
@@ -43,14 +44,17 @@ class ip_pool(scrapy.Spider):
                 ip = every.xpath("//td[contains(text(),'.')]/text()").extract()[count]
                 port = every.xpath("//td[3]/text()").extract()[count]
                 http = every.xpath("//td[6]/text()").extract()[count]
-                i = '{}:{}'.format(ip,port)
                 #测试ip是否可用
-                if int(str(requests.get('http://fanyi.youdao.com/',proxies={http:i})).split('[')[1].split(']')[0]) == 200:
-                    ip = ip.encode()
-                    port = port.encode()
-                    http = http.encode()
-                    print(ip)
-                    base(http,ip,port)
+                try:
+                    test = requests.get('http://fanyi.youdao.com/',proxies={'http':'http://{}:{}'.format(ip,port)},timeout=1)
+                    if test.status_code == 200:
+                        ip = ip.encode()
+                        port = port.encode()
+                        http = http.encode()
+                        print(ip)
+                        base(http,ip,port)
+                except:
+                    pass
         page = response.xpath("//a[contains(text(),'下一页')]/@href").extract()
         if len(page) > 0:
             page = response.urljoin(page[0])
