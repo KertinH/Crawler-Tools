@@ -1,7 +1,7 @@
 import requests
 def detection_IP():
     '''检测ip是否可用并将可用ip生成ip池'''
-    #referer可按测试网站更改
+    #referer可按需求加入
     header = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36',
          'Connection': 'keep-alive'}
     IPPOOL = []
