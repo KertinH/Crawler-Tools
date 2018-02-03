@@ -9,7 +9,7 @@ Crawler-Tools
 ###### time
 ###### requests
 ###### urllib
-#### 2、筛选ip函数
+#### 2、筛选ip函数 test_ip
 ##### 用于在引用ippool文件时检测其中ip是否可用，并提取出可用ip生成ip
 ###### requests
 <br/>
